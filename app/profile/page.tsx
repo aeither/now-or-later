@@ -49,3 +49,5 @@ const ProfilePage = () => {
 };
 
 export default ProfilePage;
+
+export const runtime = 'nodejs';
