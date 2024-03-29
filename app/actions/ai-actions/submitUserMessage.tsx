@@ -1,7 +1,7 @@
 import 'server-only';
 
 import { Confetti } from '@/components/confetti';
-import { AddRecipientComponent } from '@/components/contact-list/AddRecipientComponent';
+import { AddRecipientComponent } from '@/components/contact-list';
 import { ConfettiButton } from '@/components/dynamic-buttons/confetti-button';
 import { SendCoinConfirm } from '@/components/dynamic-buttons/send-coin-confirm';
 import {
@@ -23,15 +23,15 @@ import OpenAI from 'openai';
 import { z } from 'zod';
 import { AI } from '../ai';
 import { getPortfolio, getTokens, getTransactions } from '../zerion';
-import PortfolioComponent from '@/components/portfolio/PortfolioComponent';
-import { TransactionList } from '@/components/transactions/TransactionList';
-import TokenList from '@/components/tokens/TokenComponent';
+import { PortfolioComponent } from '@/components/portfolio';
+import { TransactionList } from '@/components/transactions';
+import { TokenListComponent } from '@/components/tokens';
 import { getAllRecipientsByAddress } from '../db';
-import { ViewRecipentsComponent } from '@/components/contact-list/ViewRecipentsComponent';
+import { ViewRecipentsComponent } from '@/components/contact-list';
 import MintTokenComponent from '@/components/web3/MintTokenComponent';
 import UploadComponent from '@/components/web3/UploadComponent';
 import { checkTokenSecurity } from '../goplus';
-import LeaderboardList from '@/components/leaderboard/LeaderboardList';
+import { LeaderboardList } from '@/components/leaderboard';
 
 interface CoinGeckoResponse {
   [key: string]: {
@@ -327,7 +327,7 @@ Besides that, you can also chat with users and do some calculations if needed.`,
       const data = await getTokens(address);
       reply.done(
         <BotCard>
-          <TokenList positions={data.data} />
+          <TokenListComponent positions={data.data} />
         </BotCard>
       );
     }

@@ -3,7 +3,9 @@
 import Link from 'next/link';
 
 import { ShellIcon } from 'lucide-react';
+import { ThirdwebClient } from 'thirdweb';
 import { ConnectButton } from 'thirdweb/react';
+import { thirdwebClient } from '@/lib/utils/config';
 
 export function Header() {
   return (
@@ -28,6 +30,7 @@ export function Header() {
             className:
               'opacity-100 hover:opacity-70 transition-all duration-300 p-2',
           }}
+          client={thirdwebClient}
         />
       </div>
     </header>

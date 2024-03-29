@@ -6,7 +6,7 @@ interface TokenListProps {
   positions: TokenPosition[];
 }
 
-export const TokenList: React.FC<TokenListProps> = ({ positions }) => {
+export const TokenListComponent: React.FC<TokenListProps> = ({ positions }) => {
   const positionsWithImages = positions.filter(
     (position) => position.attributes.fungible_info.icon?.url
   );
@@ -56,5 +56,3 @@ export const TokenList: React.FC<TokenListProps> = ({ positions }) => {
     </ul>
   );
 };
-
-export default TokenList;

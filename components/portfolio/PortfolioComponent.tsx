@@ -16,7 +16,7 @@ interface PortfolioProps {
   portfolio: PortfolioType;
 }
 
-const Portfolio: React.FC<PortfolioProps> = ({ portfolio }) => {
+export const PortfolioComponent: React.FC<PortfolioProps> = ({ portfolio }) => {
   const { attributes } = portfolio;
 
   return (
@@ -39,5 +39,3 @@ const Portfolio: React.FC<PortfolioProps> = ({ portfolio }) => {
     </Card>
   );
 };
-
-export default Portfolio;

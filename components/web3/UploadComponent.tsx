@@ -103,6 +103,7 @@ export function UploadComponent() {
             </div>
             <div className='flex w-full object-cover bg-clip-content'>
               <MediaRenderer
+                client={thirdwebClient}
                 className='w-full rounded-md object-cover'
                 src={uploadedImageUri}
                 alt='Uploaded PNG'

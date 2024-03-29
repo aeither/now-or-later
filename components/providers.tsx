@@ -48,7 +48,7 @@ export function Providers({ children, ...props }: ThemeProviderProps) {
   return (
     <NextThemesProvider {...props}>
       <TooltipProvider delayDuration={0}>
-        <ThirdwebProvider client={thirdwebClient}>{children}</ThirdwebProvider>
+        <ThirdwebProvider>{children}</ThirdwebProvider>
       </TooltipProvider>
     </NextThemesProvider>
   );
