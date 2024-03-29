@@ -2,10 +2,9 @@
 
 import Link from 'next/link';
 
-import { ShellIcon } from 'lucide-react';
-import { ThirdwebClient } from 'thirdweb';
-import { ConnectButton } from 'thirdweb/react';
 import { thirdwebClient } from '@/lib/utils/config';
+import { Settings2Icon, ShellIcon } from 'lucide-react';
+import { ConnectButton } from 'thirdweb/react';
 
 export function Header() {
   return (
@@ -20,6 +19,9 @@ export function Header() {
         </Link>
       </span>
       <div className='flex items-center justify-end space-x-2'>
+        <Link href={'/profile'} className='p-2 hover:bg-slate-500 rounded-full'>
+          <Settings2Icon />
+        </Link>
         <ConnectButton
           connectButton={{
             className:

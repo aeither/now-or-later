@@ -2,10 +2,17 @@
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const ProfilePage = () => {
   const [privateKey, setPrivateKey] = useState('');
+
+  useEffect(() => {
+    const storedPrivateKey = localStorage.getItem('ai-home-wallet-key');
+    if (storedPrivateKey) {
+      setPrivateKey(storedPrivateKey);
+    }
+  }, []);
 
   const handlePrivateKeyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setPrivateKey(e.target.value);
@@ -34,9 +41,9 @@ const ProfilePage = () => {
       <div className='mb-4'>
         <Button onClick={handleSavePrivateKey}>Save Private Key</Button>
       </div>
-      <div>
+      {/* <div>
         <Button onClick={handleLogPrivateKey}>Log Private Key</Button>
-      </div>
+      </div> */}
     </div>
   );
 };
