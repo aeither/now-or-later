@@ -2,6 +2,8 @@ import { redis } from '@/lib/redis';
 import { Client } from '@upstash/qstash';
 import { NextResponse } from 'next/server';
 
+export const runtime = 'nodejs';
+
 const qstashClient = new Client({
   token: process.env.QSTASH_TOKEN || '',
 });
