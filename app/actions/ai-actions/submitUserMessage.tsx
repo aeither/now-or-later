@@ -28,8 +28,8 @@ import { TransactionList } from '@/components/transactions';
 import { TokenListComponent } from '@/components/tokens';
 import { getAllRecipientsByAddress } from '../db';
 import { ViewRecipentsComponent } from '@/components/contact-list';
-import MintTokenComponent from '@/components/web3/MintTokenComponent';
-import UploadComponent from '@/components/web3/UploadComponent';
+import { MintTokenComponent } from '@/components/web3';
+import { UploadComponent } from '@/components/web3';
 import { checkTokenSecurity } from '../goplus';
 import { LeaderboardList } from '@/components/leaderboard';
 

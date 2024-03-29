@@ -85,5 +85,3 @@ export function MintTokenComponent({ amount }: { amount: string }) {
     </>
   );
 }
-
-export default MintTokenComponent;
