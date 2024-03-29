@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
+import { Toaster } from '@/components/ui/toaster';
+import { Analytics } from '@vercel/analytics/react';
 import { GeistMono } from 'geist/font/mono';
 import { GeistSans } from 'geist/font/sans';
-import { Analytics } from '@vercel/analytics/react';
-import { Toaster } from '@/components/ui/toaster';
+import type { Metadata } from 'next';
 import './globals.css';
 
-import { AI } from './actions/ai';
 import { Header } from '@/components/header';
 import { Providers } from '@/components/providers';
+import { AI } from './actions/ai';
 
 const meta = {
   title: 'Neon Meme',

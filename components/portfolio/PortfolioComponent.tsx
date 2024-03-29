@@ -1,13 +1,6 @@
 import { PortfolioType } from '@/app/actions/zerion';
 import React from 'react';
-import { Button } from '../ui/button';
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '../ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import PositionChanges from './PositionChanges';
 import PositionsDistribution from './PositionsDistribution';
 import TotalPositions from './TotalPositions';

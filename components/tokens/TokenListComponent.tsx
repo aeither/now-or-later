@@ -1,6 +1,6 @@
-import React from 'react';
-import Image from 'next/image';
 import { TokenPosition } from '@/app/actions/zerion';
+import Image from 'next/image';
+import React from 'react';
 
 interface TokenListProps {
   positions: TokenPosition[];

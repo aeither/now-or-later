@@ -1,14 +1,5 @@
 import { env } from '@/env';
 import { createThirdwebClient, defineChain, getContract } from 'thirdweb';
-// import { http, createConfig } from 'wagmi';
-
-// export const config = createConfig({
-//   chains: [mainnet, sepolia],
-//   transports: {
-//     [mainnet.id]: http(),
-//     [sepolia.id]: http(),
-//   },
-// });
 
 export const thirdwebClient = createThirdwebClient({
   clientId: env.NEXT_PUBLIC_THIRDWEB_CLIENT_ID,
@@ -21,11 +12,6 @@ export const lineaGoerli = defineChain({
   id: 59140,
   rpc: 'https://rpc.goerli.linea.build',
 });
-
-// const lineaChain = defineChain({
-//   id: 59144,
-//   rpc: 'https://linea.blockpi.network/v1/rpc/public',
-// });
 
 export const leaderboardContract = getContract({
   client: thirdwebClient,

@@ -1,30 +1,27 @@
 'use client';
 
-import { SetStateAction, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { UserMessage } from '@/components/llm-stocks/message';
 import { useActions, useUIState } from 'ai/rsc';
 
 import { ChatList } from '@/components/chat-list';
-import { EmptyScreen } from '@/components/empty-screen';
 import { FooterText } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { IconArrowElbow, IconPlus } from '@/components/ui/icons';
+import { IconPlus } from '@/components/ui/icons';
 import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import VoiceButton from '@/components/voice/VoiceButton';
 import { ChatScrollAnchor } from '@/lib/hooks/chat-scroll-anchor';
 import { useEnterSubmit } from '@/lib/hooks/use-enter-submit';
-import Textarea from 'react-textarea-autosize';
-import { useAccount } from 'wagmi';
-import { type AI } from './actions/ai';
-import { getAllUsers } from './actions/db';
+import { ArrowUpIcon } from 'lucide-react';
 import dynamic from 'next/dynamic';
-import { ArrowUpIcon, MicIcon } from 'lucide-react';
-import VoiceButton from '@/components/voice/VoiceButton';
+import Textarea from 'react-textarea-autosize';
 import { useActiveAccount } from 'thirdweb/react';
+import { type AI } from './actions/ai';
 
 const BrowserOnlyEmptyScreen = dynamic(
   () => import('../components/empty-screen').then((mod) => mod.EmptyScreen),

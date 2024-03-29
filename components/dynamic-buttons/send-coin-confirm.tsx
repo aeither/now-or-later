@@ -1,19 +1,19 @@
 'use client';
 
 import { AI } from '@/app/actions/ai';
-import { useActions, useUIState } from 'ai/rsc';
+import { useUIState } from 'ai/rsc';
 import { useState } from 'react';
 import { Button } from '../ui/button';
-import { Input } from '../ui/input';
-import { Label } from '../ui/label';
 import {
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
 } from '../ui/card';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
 
 export function SendCoinConfirm({
   amount,

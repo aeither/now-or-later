@@ -1,24 +1,12 @@
-import * as React from 'react';
-
-import { Button } from '@/components/ui/button';
 import {
   leaderboardAddress,
   leaderboardContract,
   lineaGoerli,
   thirdwebClient,
-  tokenAddress,
 } from '@/lib/utils/config';
-import { useState } from 'react';
-import { prepareContractCall, prepareTransaction, toWei } from 'thirdweb';
+import { prepareContractCall, toWei } from 'thirdweb';
 import { getContract } from 'thirdweb/contract';
-import {
-  MediaRenderer,
-  useActiveAccount,
-  useEstimateGas,
-  useReadContract,
-  useSendTransaction,
-} from 'thirdweb/react';
-import { upload } from 'thirdweb/storage';
+import { useActiveAccount, useSendTransaction } from 'thirdweb/react';
 
 export function useLeaderboard() {
   const activeAccount = useActiveAccount();

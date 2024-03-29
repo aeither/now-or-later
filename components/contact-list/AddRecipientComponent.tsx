@@ -1,22 +1,21 @@
 'use client';
 
+import { AI } from '@/app/actions/ai';
+import { addRecipient } from '@/app/actions/db';
+import { useUIState } from 'ai/rsc';
 import { useState } from 'react';
+import { useActiveAccount } from 'thirdweb/react';
+import { SystemMessage } from '../llm-stocks';
 import { Button } from '../ui/button';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from '../ui/card';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
-import { addRecipient } from '@/app/actions/db';
-import { useActiveAccount } from 'thirdweb/react';
-import { useUIState } from 'ai/rsc';
-import { AI } from '@/app/actions/ai';
-import { SystemMessage } from '../llm-stocks';
 
 export function AddRecipientComponent({
   name,

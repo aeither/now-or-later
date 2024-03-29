@@ -1,12 +1,12 @@
 'use client';
 
-import JSConfetti from 'js-confetti';
-import { Button } from '../ui/button';
-import { useActions, useUIState } from 'ai/rsc';
-import { useState } from 'react';
 import { AI } from '@/app/actions/ai';
-import { BotCard } from '../llm-stocks';
+import { useUIState } from 'ai/rsc';
+import JSConfetti from 'js-confetti';
+import { useState } from 'react';
 import { useSignMessage } from 'wagmi';
+import { BotCard } from '../llm-stocks';
+import { Button } from '../ui/button';
 
 export function ConfettiButton() {
   const { signMessage } = useSignMessage();
