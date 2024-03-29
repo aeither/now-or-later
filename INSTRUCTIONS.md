@@ -10,6 +10,16 @@
 
 - thirdweb: estimate gas requires simulate contract interaction or defining gas when sending amount
 
+## Schedule
+
+```bash
+npm run dev
+```
+
+```bash
+ngrok http 3000
+```
+
 ## Setup DB
 
 Create new Postgres DB on Neon

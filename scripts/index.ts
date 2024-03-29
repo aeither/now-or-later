@@ -1,10 +1,14 @@
 import { users } from '@/drizzle/schema';
-import { env } from '@/env';
 import { drizzle } from 'drizzle-orm/postgres-js';
 import postgres from 'postgres';
+import dotenv from 'dotenv';
+dotenv.config();
+
+if (!process.env.DATABASE_URL) throw new Error('DATABASE_URL not found');
+const DATABASE_URL = process.env.DATABASE_URL;
 
 // Disable prefetch as it is not supported for "Transaction" pool mode
-const client = postgres(env.DATABASE_URL, { prepare: false });
+const client = postgres(DATABASE_URL, { prepare: false });
 const db = drizzle(client);
 
 async function main() {

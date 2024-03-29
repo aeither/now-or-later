@@ -8,6 +8,10 @@ export const env = createEnv({
     DEEPGRAM_API_KEY: z.string().min(1),
     ZERION_API_KEY: z.string().min(1),
     THIRDWEB_SECRET_KEY: z.string().min(1),
+    QSTASH_URL: z.string().min(1),
+    QSTASH_TOKEN: z.string().min(1),
+    UPSTASH_REDIS_REST_URL: z.string().min(1),
+    UPSTASH_REDIS_REST_TOKEN: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: z.string().min(1),
