@@ -1,10 +1,4 @@
-type RequestBody = {
-  email: string;
-  prompt: string;
-  message: string;
-  timestamp: number;
-};
-import redis from '@/lib/redis';
+import { redis } from '@/lib/redis';
 import { Client } from '@upstash/qstash';
 import { NextResponse } from 'next/server';
 
@@ -14,14 +8,14 @@ const qstashClient = new Client({
 
 export async function POST(request: Request) {
   try {
-    const body: RequestBody = await request.json();
     const host = request.headers.get('host');
+    const body = await request.json();
 
     console.log('schedule', body);
 
     const qstashResponse = await qstashClient.publishJSON({
       url: `https://${host}/api/qstash`,
-      body: body,
+      body,
       notBefore: body?.timestamp,
     });
 
