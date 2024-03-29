@@ -14,7 +14,7 @@ export function Header() {
         </Link>
         <div className='w-2 h-2 text-muted-foreground/20'></div>
         <Link href='/'>
-          <span className='text-lg font-bold'>Frog Pal</span>
+          <span className='text-lg font-bold'>Neon Meme</span>
         </Link>
       </span>
       <div className='flex items-center justify-end space-x-2'>

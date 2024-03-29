@@ -10,15 +10,15 @@ import { Header } from '@/components/header';
 import { Providers } from '@/components/providers';
 
 const meta = {
-  title: 'Frog Pal',
+  title: 'Neon Meme',
   description:
     'Demo of an interactive financial assistant built using Next.js and Vercel AI SDK.',
 };
 export const metadata: Metadata = {
   ...meta,
   title: {
-    default: 'Frog Pal',
-    template: `%s - Frog Pal`,
+    default: 'Neon Meme',
+    template: `%s - Neon Meme`,
   },
   icons: {
     icon: '/favicon.ico',
