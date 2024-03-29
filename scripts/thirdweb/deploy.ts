@@ -8,8 +8,8 @@ import { privateKeyAccount } from 'thirdweb/wallets';
 
 // if (!process.env.PRIVATE_KEY) throw new Error('PRIVATE_KEY not found');
 // const PRIVATE_KEY = process.env.PRIVATE_KEY;
-const PRIVATE_KEY =
-  '02cf9f434c215010d92eee4bfa6b4c7d81722e468dcd353ed37ebbe37fcd959b';
+if (!process.env.PRIVATE_KEY) throw new Error('PRIVATE_KEY not found');
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
 // public key 0x005522D1AEF1e6922c9bcc82a5970340B604Fe0e
 
 const client = createThirdwebClient({
