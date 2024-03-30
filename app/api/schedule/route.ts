@@ -5,10 +5,6 @@ import { ActionBody } from '../qstash/route';
 
 export const runtime = 'nodejs';
 
-const qstashClient = new Client({
-  token: process.env.QSTASH_TOKEN || '',
-});
-
 export async function POST(request: Request) {
   try {
     const host = request.headers.get('host');
