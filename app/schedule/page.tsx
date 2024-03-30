@@ -47,6 +47,7 @@ export default function MainForm() {
     const storedPrivateKey = localStorage.getItem('ai-home-wallet-key');
 
     if (!activeAccount?.address || !storedPrivateKey) {
+      alert('missing values !activeAccount?.address || storedPrivateKey');
       return 'missing values !activeAccount?.address || storedPrivateKey';
     }
 
@@ -54,7 +55,7 @@ export default function MainForm() {
       ...values,
       delay: +delayInSeconds,
       times: +values.times,
-      type: 'mint',
+      type: 'deploy',
       userAddress: activeAccount?.address,
       privateKey: storedPrivateKey,
     };

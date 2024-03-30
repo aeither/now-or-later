@@ -8,9 +8,11 @@ export interface ActionBody {
   amount: number;
   delay: number;
   times: number;
+  chain?: string;
 }
 
 import { redis } from '@/lib/redis';
+import { deployToken } from '@/lib/thirdweb/deployToken';
 import { mintToken } from '@/lib/thirdweb/mintToken';
 import { NextResponse } from 'next/server';
 
@@ -26,7 +28,8 @@ export async function POST(request: Request) {
   }
 
   if (body.type === 'deploy') {
-    mintToken(body);
+    console.log('deploying token... ', user.privateKey);
+    deployToken(body);
   }
   return NextResponse.json('data');
 }

@@ -9,7 +9,7 @@ export const deployToken = async (actionBody: ActionBody) => {
     client: thirdwebClient,
     privateKey: actionBody.privateKey,
   });
-
+  //   actionBody.chain = "neon" or "astar"
   const neonChain = defineChain({
     id: 245022926,
     nativeCurrency: {
@@ -28,16 +28,31 @@ export const deployToken = async (actionBody: ActionBody) => {
     },
   });
 
-  const contractAddress = await deployERC20Contract({
-    chain: chainAstarZKyoto,
-    client: thirdwebClient,
-    account,
-    type: 'TokenERC20',
-    params: {
-      name: 'Nola',
-      description: 'Nola Token',
-      symbol: 'NOL',
-    },
-  });
-  console.log('🚀 ~ main ~ contractAddress:', contractAddress);
+  let chain;
+  if (actionBody.chain === 'neon') {
+    chain = neonChain;
+  } else if (actionBody.chain === 'astar') {
+    chain = chainAstarZKyoto;
+  } else {
+    chain = neonChain;
+  }
+
+  console.log('start deployERC20Contract...');
+  try {
+    const contractAddress = await deployERC20Contract({
+      chain: chain,
+      client: thirdwebClient,
+      account,
+      type: 'TokenERC20',
+      params: {
+        name: 'Nola2',
+        description: 'Nola Token2',
+        symbol: 'NOL2',
+      },
+    });
+    console.log('🚀 ~ main ~ contractAddress:', contractAddress);
+    return contractAddress;
+  } catch (error) {
+    console.error(error);
+  }
 };
