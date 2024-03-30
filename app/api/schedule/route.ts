@@ -1,7 +1,7 @@
 import { redis } from '@/lib/redis';
-import { Client } from '@upstash/qstash';
 import { NextResponse } from 'next/server';
 import { ActionBody } from '../qstash/route';
+import { qstashClient } from '@/lib/upstash';
 
 export const runtime = 'nodejs';
 
