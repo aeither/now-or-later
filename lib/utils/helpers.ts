@@ -35,3 +35,29 @@ export function truncateString(str: string, maxLength: number = 6): string {
   }
   return `${str.slice(0, maxLength)}...`; // Return the truncated string with "..."
 }
+
+export function convertToSeconds(relativeDelay: string): number {
+  const regex = /^(\d+)([smhd]?)$/;
+  const match = relativeDelay.match(regex);
+
+  if (!match) {
+    return 0;
+    // throw new Error('Invalid relative delay format');
+  }
+
+  const value = parseInt(match[1], 10);
+  const unit = match[2];
+
+  switch (unit) {
+    case 's':
+      return value;
+    case 'm':
+      return value * 60;
+    case 'h':
+      return value * 3600;
+    case 'd':
+      return value * 86400;
+    default:
+      throw new Error('Invalid unit');
+  }
+}

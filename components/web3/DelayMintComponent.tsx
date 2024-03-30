@@ -17,7 +17,7 @@ const contract = getContract({
   chain: lineaGoerli,
 });
 
-export function MintTokenComponent({ amount }: { amount: string }) {
+export function DelayMintComponent({ amount }: { amount: string }) {
   const activeAccount = useActiveAccount();
   const { mutate: sendTx, data: transactionHash } = useSendTransaction();
   const [currentAmount, setCurrentAmount] = useState(amount);
@@ -77,10 +77,6 @@ export function MintTokenComponent({ amount }: { amount: string }) {
           Mint
         </Button>
       </div>
-
-      {/* {transactionHash && (
-        <div>{`https://goerli.lineascan.build/tx/${transactionHash.transactionHash}`}</div>
-      )} */}
     </>
   );
 }

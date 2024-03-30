@@ -8,23 +8,27 @@ const qstashClient = new Client({
   token: process.env.QSTASH_TOKEN || '',
 });
 
+interface PostBody {
+  address: string;
+  amount: number;
+  delay: number;
+  times: number;
+}
+
 export async function POST(request: Request) {
   try {
     const host = request.headers.get('host');
-    const body = await request.json();
+    const body: PostBody = await request.json();
     const times = body.times || 1; // Default to 1 if times is not provided
 
     console.log('schedule', body);
 
     const promises = [];
     for (let i = 0; i < times; i++) {
-      const notBefore = body?.timestamp
-        ? new Date(body.timestamp).getTime() + i * 60 * 1000
-        : null; // Add 1 minute for each subsequent message
       const qstashResponse = qstashClient.publishJSON({
         url: `https://${host}/api/qstash`,
         body,
-        notBefore: body?.timestamp + i * 10, // separate each call by 10 seconds
+        delay: body.delay + i * 10, // separate each call by 10 seconds
       });
       promises.push(qstashResponse);
     }
@@ -32,7 +36,7 @@ export async function POST(request: Request) {
     const qstashResponses = await Promise.all(promises);
 
     const postId = Date.now().toString();
-    await redis!.hset(postId, body);
+    await redis!.hset(postId, body as any);
 
     return NextResponse.json(qstashResponses);
   } catch (error) {
