@@ -55,7 +55,7 @@ export default function MainForm() {
       ...values,
       delay: +delayInSeconds,
       times: +values.times,
-      type: 'watch',
+      type: 'email',
       userAddress: activeAccount?.address,
       privateKey: storedPrivateKey,
     };

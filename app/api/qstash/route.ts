@@ -1,4 +1,4 @@
-type ActionTypes = 'mint' | 'deploy' | 'watch';
+type ActionTypes = 'mint' | 'deploy' | 'telegram' | 'email';
 
 export interface ActionBody {
   type: ActionTypes;
@@ -14,6 +14,7 @@ export interface ActionBody {
 import { redis } from '@/lib/redis';
 import { deployToken } from '@/lib/thirdweb/deployToken';
 import { mintToken } from '@/lib/thirdweb/mintToken';
+import { sendEmail } from '@/lib/utils/resend';
 import { sendMessageToTelegram } from '@/lib/utils/telegram';
 import { NextResponse } from 'next/server';
 
@@ -33,9 +34,15 @@ export async function POST(request: Request) {
     deployToken(body);
   }
 
-  if (body.type === 'watch') {
-    console.log('watching tokens... ');
+  if (body.type === 'telegram') {
+    console.log('sending message to Telegram... ');
     sendMessageToTelegram(body);
   }
+
+  if (body.type === 'email') {
+    console.log('sending email... ');
+    sendEmail(body);
+  }
+
   return NextResponse.json('data');
 }
