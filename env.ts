@@ -13,6 +13,8 @@ export const env = createEnv({
     UPSTASH_REDIS_REST_URL: z.string().min(1),
     UPSTASH_REDIS_REST_TOKEN: z.string().min(1),
     RESEND_TOKEN: z.string().min(1),
+    TELEGRAM_BOT_TOKEN: z.string().min(1),
+    TELEGRAM_CHAT_ID: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: z.string().min(1),

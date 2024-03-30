@@ -14,6 +14,7 @@ export interface ActionBody {
 import { redis } from '@/lib/redis';
 import { deployToken } from '@/lib/thirdweb/deployToken';
 import { mintToken } from '@/lib/thirdweb/mintToken';
+import { sendMessageToTelegram } from '@/lib/utils/telegram';
 import { NextResponse } from 'next/server';
 
 export async function POST(request: Request) {
@@ -30,6 +31,11 @@ export async function POST(request: Request) {
   if (body.type === 'deploy') {
     console.log('deploying token... ', user.privateKey);
     deployToken(body);
+  }
+
+  if (body.type === 'watch') {
+    console.log('watching tokens... ');
+    sendMessageToTelegram(body);
   }
   return NextResponse.json('data');
 }
