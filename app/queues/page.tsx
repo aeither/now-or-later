@@ -5,6 +5,11 @@ import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 import { getQStashMessages } from '../actions/qstash';
 import { Button } from '@/components/ui/button';
+import {
+  formatTimeAgo,
+  formatTimeFromNow,
+  truncateString,
+} from '@/lib/utils/helpers';
 
 type EventSimple = {
   messageId: string;
@@ -14,15 +19,14 @@ type EventSimple = {
 };
 
 export default function QStashPage() {
-  const [queuedMessages, setQueuedMessages] = useState<any[]>([]);
   const [createdMessages, setCreatedMessages] = useState<EventSimple[]>([]);
 
   const currentTime = new Date().getTime();
 
   const callGetMessages = async () => {
-    console.log('🚀 ~ callGetMessages ~ before ');
-    const messages = await getQStashMessages();
-    console.log('🚀 ~ callGetMessages ~ messages:', messages);
+    // console.log('🚀 ~ callGetMessages ~ before ');
+    // const messages = await getQStashMessages();
+    console.log('🚀 ~ callGetMessages ~ messages:', createdMessages);
   };
 
   useEffect(() => {
@@ -31,25 +35,17 @@ export default function QStashPage() {
       const uniqueCreatedMessageIds: EventSimple[] = [];
 
       messages.forEach((event) => {
-        if (event.state === 'CREATED') {
-          console.log(
-            event.nextDeliveryTime && event.nextDeliveryTime > currentTime,
-            ' and '
-          );
-
+        if (
+          event.state === 'CREATED' &&
+          event.nextDeliveryTime &&
+          event.nextDeliveryTime > currentTime
+        ) {
           uniqueCreatedMessageIds.push({
             messageId: event.messageId,
             state: event.state,
             time: event.time,
             nextDeliveryTime: event.nextDeliveryTime,
           });
-        } else {
-          const index = uniqueCreatedMessageIds.findIndex(
-            (msg) => msg.messageId === event.messageId
-          );
-          if (index !== -1) {
-            uniqueCreatedMessageIds.splice(index, 1);
-          }
         }
       });
 
@@ -66,17 +62,29 @@ export default function QStashPage() {
       <div className='container mx-auto px-4 py-8'>
         <h1 className='text-3xl font-bold mb-4'>Created Messages</h1>
         <ul className='space-y-2'>
-          {createdMessages
-            .filter((message) => message.time > currentTime)
-            .map(({ messageId, time, state }) => (
+          {createdMessages.map(
+            ({ messageId, time, state, nextDeliveryTime }) => (
               <li key={messageId} className='p-4 rounded-md'>
                 <>
                   <div>{messageId}</div>
-                  <div>{time}</div>
-                  <div>{state}</div>
+                  <div>
+                    Executes in{' '}
+                    {formatTimeFromNow(
+                      nextDeliveryTime?.toString() ||
+                        new Date().getTime().toString()
+                    )}
+                  </div>
+                  <div>
+                    Scheduled{' '}
+                    {formatTimeAgo(
+                      time.toString() || new Date().getTime().toString()
+                    )}
+                  </div>
+                  {/* <div>{state}</div> */}
                 </>
               </li>
-            ))}
+            )
+          )}
         </ul>
       </div>
     </div>

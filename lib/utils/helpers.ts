@@ -3,7 +3,7 @@ export function roundToTwoDecimals(num: number) {
 }
 
 export function formatTimeAgo(dateString: string): string {
-  const date = new Date(dateString);
+  const date = new Date(parseInt(dateString));
   const seconds = Math.floor((new Date().getTime() - date.getTime()) / 1000);
 
   let interval = Math.floor(seconds / 31536000);
@@ -27,6 +27,35 @@ export function formatTimeAgo(dateString: string): string {
     return `${interval} minute${interval > 1 ? 's' : ''} ago`;
   }
   return `${Math.floor(seconds)} second${seconds !== 1 ? 's' : ''} ago`;
+}
+
+export function formatTimeFromNow(dateString: string): string {
+  console.log('🚀 ~ formatTimeFromNow ~ dateString:', dateString);
+  const date = new Date(parseInt(dateString));
+  console.log('🚀 ~ formatTimeFromNow ~ date:', date);
+  const seconds = Math.floor((date.getTime() - new Date().getTime()) / 1000);
+
+  let interval = Math.floor(seconds / 31536000);
+  if (interval >= 1) {
+    return `in ${interval} year${interval > 1 ? 's' : ''}`;
+  }
+  interval = Math.floor(seconds / 2592000);
+  if (interval >= 1) {
+    return `in ${interval} month${interval > 1 ? 's' : ''}`;
+  }
+  interval = Math.floor(seconds / 86400);
+  if (interval >= 1) {
+    return `in ${interval} day${interval > 1 ? 's' : ''}`;
+  }
+  interval = Math.floor(seconds / 3600);
+  if (interval >= 1) {
+    return `in ${interval} hour${interval > 1 ? 's' : ''}`;
+  }
+  interval = Math.floor(seconds / 60);
+  if (interval >= 1) {
+    return `in ${interval} minute${interval > 1 ? 's' : ''}`;
+  }
+  return `in ${Math.floor(seconds)} second${seconds !== 1 ? 's' : ''}`;
 }
 
 export function truncateString(str: string, maxLength: number = 6): string {
