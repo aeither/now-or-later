@@ -80,3 +80,8 @@ npx drizzle-kit push:pg
 ## Zerion
 
 - Mainnet portfolios
+
+##
+
+- DelayMintComponent
+- DeployComponent

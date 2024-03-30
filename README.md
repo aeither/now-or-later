@@ -1,8 +1,22 @@
 # Project Neon SK
 
+Logo
+
+Cover Image (1200X630) + 5 pictures
+
+AI Assistant that can help you right in the moment or later
+
 ## Demo
 
 http://neonlaunch.xyz/
+
+github link
+
+video link
+
+## The problem it solves
+
+## Challenges I ran into
 
 ## Description
 

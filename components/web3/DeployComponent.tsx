@@ -27,7 +27,7 @@ const formSchema = z.object({
   times: z.string().min(1, { message: 'Required' }),
 });
 
-export function DelayMintComponent() {
+export function DeployComponent() {
   const activeAccount = useActiveAccount();
   const router = useRouter();
   const { toast } = useToast();
@@ -35,7 +35,7 @@ export function DelayMintComponent() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       // prompt: "",
-      address: '0x99160B322E92739f03050cA8BAa32Df658C9e423',
+      address: '',
       amount: 100,
       delay: 'now',
       times: '3',
@@ -54,8 +54,8 @@ export function DelayMintComponent() {
     const combinedValues: ActionBody = {
       ...values,
       delay: +delayInSeconds,
-      times: +values.times,
-      type: 'mint',
+      times: 1,
+      type: 'deploy',
       userAddress: activeAccount?.address,
       privateKey: storedPrivateKey,
     };
@@ -82,26 +82,12 @@ export function DelayMintComponent() {
   return (
     <>
       <div className='flex flex-col w-full items-center justify-between'>
-        <h1 className='text-4xl font-bold'>Mint Token</h1>
+        <h1 className='text-4xl font-bold'>Deploy Token</h1>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className='space-y-8 w-full'
           >
-            <FormField
-              control={form.control}
-              name='address'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Token Address</FormLabel>
-                  <FormControl>
-                    <Input placeholder='0x123...' {...field} />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name='amount'
@@ -144,7 +130,7 @@ export function DelayMintComponent() {
               )}
             />
             <Button variant='outline' type='submit'>
-              Mint
+              Deploy
             </Button>
           </form>
         </Form>
