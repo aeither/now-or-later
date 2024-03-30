@@ -1,54 +1,34 @@
 'use client';
 
-type TimeKey = 'morning' | 'afternoon' | 'evening';
-
-import { Calendar } from '@/components/ui/calendar';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
-import { cn } from '@/lib/utils';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { format } from 'date-fns';
-import { CalendarIcon } from 'lucide-react';
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
-import * as z from 'zod';
-
 import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from '@/components/ui/form';
-
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/components/ui/use-toast';
-
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
 import { convertToSeconds } from '@/lib/utils/helpers';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
+import { useActiveAccount } from 'thirdweb/react';
+import * as z from 'zod';
+import { ActionBody } from '../api/qstash/route';
 
 const formSchema = z.object({
   // prompt: z.string().nonempty({ message: "Required" }),
   address: z.string().min(1, { message: 'Required' }),
   amount: z.number().min(1, { message: 'Required' }),
   delay: z.string().min(1, { message: 'Required' }),
-  times: z.number().min(1, { message: 'Required' }),
+  times: z.string().min(1, { message: 'Required' }),
 });
 
 export default function MainForm() {
+  const activeAccount = useActiveAccount();
   const router = useRouter();
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
@@ -58,32 +38,44 @@ export default function MainForm() {
       address: '',
       amount: 100,
       delay: 'now',
-      times: 3,
+      times: '3',
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const delayInSeconds = convertToSeconds(values.delay);
+    const storedPrivateKey = localStorage.getItem('ai-home-wallet-key');
 
-    const combinedValues = { ...values, delay: delayInSeconds };
+    if (!activeAccount?.address || !storedPrivateKey) {
+      return 'missing values !activeAccount?.address || storedPrivateKey';
+    }
+
+    const combinedValues: ActionBody = {
+      ...values,
+      delay: +delayInSeconds,
+      times: +values.times,
+      type: 'mint',
+      userAddress: activeAccount?.address,
+      privateKey: storedPrivateKey,
+    };
     console.log(combinedValues);
 
-    // const response = await fetch('/api/schedule', {
-    //   method: 'POST',
-    //   body: JSON.stringify(combinedValues),
-    // });
+    const response = await fetch('/api/schedule', {
+      method: 'POST',
+      body: JSON.stringify(combinedValues),
+    });
 
-    // if (response.status === 200) {
-    //   toast({
-    //     title: 'Success',
-    //     description: 'Postcard succesfully scheduled.',
-    //   });
-    // } else {
-    //   toast({
-    //     title: 'Uh oh...',
-    //     description: 'Something went wrong...',
-    //   });
-    // }
+    if (response.status === 200) {
+      toast({
+        title: 'Success',
+        description: 'Postcard succesfully scheduled.',
+      });
+    } else {
+      toast({
+        title: 'Uh oh...',
+        description: 'Something went wrong...',
+      });
+    }
   };
 
   return (
@@ -115,7 +107,7 @@ export default function MainForm() {
                 <FormItem>
                   <FormLabel>Amount</FormLabel>
                   <FormControl>
-                    <Input placeholder='100' {...field} />
+                    <Input placeholder='100' type='number' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -142,7 +134,7 @@ export default function MainForm() {
                 <FormItem>
                   <FormLabel>Times</FormLabel>
                   <FormControl>
-                    <Input placeholder='3' {...field} />
+                    <Input {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -158,5 +150,3 @@ export default function MainForm() {
     </>
   );
 }
-
-export const runtime = 'nodejs';

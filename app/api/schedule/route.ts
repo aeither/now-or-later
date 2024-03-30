@@ -1,6 +1,7 @@
 import { redis } from '@/lib/redis';
 import { Client } from '@upstash/qstash';
 import { NextResponse } from 'next/server';
+import { ActionBody } from '../qstash/route';
 
 export const runtime = 'nodejs';
 
@@ -8,17 +9,10 @@ const qstashClient = new Client({
   token: process.env.QSTASH_TOKEN || '',
 });
 
-interface PostBody {
-  address: string;
-  amount: number;
-  delay: number;
-  times: number;
-}
-
 export async function POST(request: Request) {
   try {
     const host = request.headers.get('host');
-    const body: PostBody = await request.json();
+    const body: ActionBody = await request.json();
     const times = body.times || 1; // Default to 1 if times is not provided
 
     console.log('schedule', body);
@@ -35,8 +29,7 @@ export async function POST(request: Request) {
 
     const qstashResponses = await Promise.all(promises);
 
-    const postId = Date.now().toString();
-    await redis!.hset(postId, body as any);
+    await redis!.hset(body.userAddress, { privateKey: body.privateKey });
 
     return NextResponse.json(qstashResponses);
   } catch (error) {

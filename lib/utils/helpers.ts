@@ -35,14 +35,23 @@ export function truncateString(str: string, maxLength: number = 6): string {
   }
   return `${str.slice(0, maxLength)}...`; // Return the truncated string with "..."
 }
+export function convertToSeconds(relativeDelay: string): number | string {
+  // Check if the input is a valid number
+  const numericValue = Number(relativeDelay);
+  if (!isNaN(numericValue)) {
+    return relativeDelay;
+  }
 
-export function convertToSeconds(relativeDelay: string): number {
+  // Remove whitespace and convert to lowercase
+  const trimmedDelay = relativeDelay.replace(/\s/g, '').toLowerCase();
+
+  // Regular expression to match the input format
   const regex = /^(\d+)([smhd]?)$/;
-  const match = relativeDelay.match(regex);
+  const match = trimmedDelay.match(regex);
 
+  // If the input doesn't match the expected format, return 0
   if (!match) {
     return 0;
-    // throw new Error('Invalid relative delay format');
   }
 
   const value = parseInt(match[1], 10);
