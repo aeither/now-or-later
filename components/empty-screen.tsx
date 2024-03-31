@@ -45,7 +45,7 @@ export function EmptyScreen({
       <div className=' mx-auto max-w-2xl px-4 py-6'>
         <div className='flex shrink-0 select-none items-center justify-center rounded-md border shadow-sm bg-primary overflow-hidden'>
           <img
-            src='/frog_pal_square.jpg'
+            src='/neon_orb.png'
             alt=''
             className='object-cover w-full h-full'
           />

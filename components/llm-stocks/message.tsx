@@ -43,7 +43,7 @@ export function BotMessage({
       <div className='flex flex-row w-full justify-between py-2'>
         <div className='flex h-8 w-8 shrink-0 select-none items-center justify-center rounded-md border shadow-sm bg-primary overflow-hidden'>
           <img
-            src='/frog_pal_square.jpg'
+            src='/neon_orb.png'
             alt=''
             className='object-cover w-full h-full'
           />
@@ -87,7 +87,7 @@ export function BotCard({
           )}
         >
           <img
-            src='/frog_pal_square.jpg'
+            src='/neon_orb.png'
             alt=''
             className='object-cover w-full h-full'
           />
