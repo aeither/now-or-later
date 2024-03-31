@@ -8,7 +8,7 @@ AI Assistant that can help you navigate web3 right in the moment or later
 
 [Github](https://github.com/aeither/now-or-later)
 
-video link
+[Video Demo](https://youtu.be/suJv9GOmJfc)
 
 ## The problem it solves
 
