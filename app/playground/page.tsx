@@ -52,6 +52,7 @@ import { TokenListComponent } from '@/components/tokens';
 import { DelayMintComponent } from '@/components/web3/DelayMintComponent';
 import { DeployComponent } from '@/components/web3/DeployComponent';
 import { ScheduleNewsletterComponent } from '@/components/web3/ScheduleNewsletterComponent';
+import { TelegramNotifyComponent } from '@/components/web3/TelegramNotifyComponent';
 
 // const userMessage = (
 //   <UserMessage>
@@ -96,6 +97,12 @@ const deployComponent = (
 const scheduleNewsletterComponent = (
   <BotCard>
     <ScheduleNewsletterComponent />
+  </BotCard>
+);
+
+const telegramNotifyComponent = (
+  <BotCard>
+    <TelegramNotifyComponent />
   </BotCard>
 );
 
@@ -222,6 +229,10 @@ export default function Page() {
       {
         id: Date.now(),
         display: scheduleNewsletterComponent,
+      },
+      {
+        id: Date.now(),
+        display: telegramNotifyComponent,
       },
       // {
       //   id: Date.now(),

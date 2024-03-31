@@ -22,7 +22,6 @@ import { Textarea } from '../ui/textarea';
 
 const formSchema = z.object({
   // prompt: z.string().nonempty({ message: "Required" }),
-  email: z.string().min(1, { message: 'Required' }),
   content: z.string().min(1, { message: 'Required' }),
   address: z.string().min(1, { message: 'Required' }),
   amount: z.number().min(1, { message: 'Required' }),
@@ -30,7 +29,7 @@ const formSchema = z.object({
   times: z.string().min(1, { message: 'Required' }),
 });
 
-export function ScheduleNewsletterComponent() {
+export function TelegramNotifyComponent() {
   const activeAccount = useActiveAccount();
   const router = useRouter();
   const { toast } = useToast();
@@ -38,7 +37,6 @@ export function ScheduleNewsletterComponent() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       // prompt: "",
-      email: 'test@mail.com',
       content: 'native coin price',
       address: '0x99160B322E92739f03050cA8BAa32Df658C9e423',
       amount: 100,
@@ -60,7 +58,7 @@ export function ScheduleNewsletterComponent() {
       ...values,
       delay: +delayInSeconds,
       times: 1,
-      type: 'email',
+      type: 'telegram',
       userAddress: activeAccount?.address,
       privateKey: storedPrivateKey,
     };
@@ -87,26 +85,12 @@ export function ScheduleNewsletterComponent() {
   return (
     <>
       <div className='flex flex-col w-full items-center justify-between'>
-        <h1 className='text-4xl font-bold'>Send Newsletter</h1>
+        <h1 className='text-4xl font-bold'>Notify on Telegram</h1>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className='space-y-8 w-full'
           >
-            <FormField
-              control={form.control}
-              name='email'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input placeholder='email' {...field} />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name='content'
@@ -137,7 +121,7 @@ export function ScheduleNewsletterComponent() {
               )}
             />
             <Button variant='outline' type='submit'>
-              Schedule
+              Notify
             </Button>
           </form>
         </Form>
