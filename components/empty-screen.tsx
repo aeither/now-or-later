@@ -50,10 +50,6 @@ export function EmptyScreen({
             className='object-cover w-full h-full'
           />
         </div>
-        <h2 className='flex text-center'>
-          Hey there buddy, it's your old pal Frog! What's shakin'? Need a hand
-          with anything?
-        </h2>
       </div>
       <div className='mx-auto max-w-2xl px-4'>
         <div className='rounded-lg border bg-background p-8 mb-4'>

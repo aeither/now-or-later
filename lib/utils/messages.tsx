@@ -1,23 +1,23 @@
 const exampleMessages = [
   {
-    heading: 'Show me my portfolio',
-    message: 'Show me my portfolio',
+    heading: 'List queued actions',
+    message: 'List queued actions',
   },
   {
-    heading: 'I want to upload an Image',
-    message: 'I want to upload an Image',
+    heading: 'Send Telegram notification',
+    message: 'Send Telegram notification',
   },
   {
-    heading: 'Open the leaderboard',
-    message: 'Open the leaderboard',
+    heading: 'Schedule email/newsletter',
+    message: 'Schedule email/newsletter',
   },
   {
-    heading: 'What is in my favourite list',
-    message: 'What is in my favourite list',
+    heading: 'Deploy new token contract',
+    message: 'Deploy new token contract',
   },
   {
-    heading: 'Mint me 130 tokens, please',
-    message: 'Mint me 130 tokens, please',
+    heading: 'Mint tokens with delay',
+    message: 'Mint tokens with delay',
   },
 ];
 
