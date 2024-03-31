@@ -71,8 +71,8 @@ export function TelegramNotifyComponent() {
 
     if (response.status === 200) {
       toast({
-        title: 'Success',
-        description: 'Action succesfully scheduled.',
+        title: 'Action Confirmed',
+        description: 'Action has been successfully scheduled.',
       });
     } else {
       toast({
