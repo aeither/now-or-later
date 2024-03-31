@@ -3,6 +3,7 @@ import { defineChain } from 'thirdweb/chains';
 import { deployERC20Contract } from 'thirdweb/deploys';
 import { privateKeyAccount } from 'thirdweb/wallets';
 import { thirdwebClient } from '../utils/config';
+import { sendMessageToTelegram } from '../utils/telegram';
 
 export const deployToken = async (actionBody: ActionBody) => {
   const account = privateKeyAccount({
@@ -50,7 +51,11 @@ export const deployToken = async (actionBody: ActionBody) => {
         symbol: 'NOLA',
       },
     });
-    console.log('🚀 ~ main ~ contractAddress:', contractAddress);
+
+    sendMessageToTelegram(
+      `New Deployed contract address: \`${contractAddress}\``
+    );
+    console.log('🚀 deployed contract Address:', contractAddress);
     return contractAddress;
   } catch (error) {
     console.error(error);
