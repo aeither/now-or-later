@@ -42,7 +42,7 @@ export function EmptyScreen({
   };
   return (
     <>
-      <div className=' mx-auto max-w-2xl px-4 py-6'>
+      <div className='mx-auto max-w-2xl px-4 py-6'>
         <div className='flex shrink-0 select-none items-center justify-center rounded-md border shadow-sm bg-primary overflow-hidden'>
           <img
             src='/neon_orb.png'
@@ -54,7 +54,7 @@ export function EmptyScreen({
       <div className='mx-auto max-w-2xl px-4'>
         <div className='rounded-lg border bg-background p-8 mb-4'>
           <div className='flex w-full justify-between items-center mb-4'>
-            <h1 className='text-lg font-semibold'>Shortcuts</h1>
+            <h1 className='text-lg font-semibold'>Actions</h1>
             <div className='flex gap-2'>
               <Button
                 onClick={() => setEditMode(!editMode)}
