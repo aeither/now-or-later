@@ -39,7 +39,7 @@ export async function POST(request: Request) {
 
   if (body.type === 'telegram') {
     console.log('sending message to Telegram... ');
-    sendMessageToTelegram('message here');
+    sendMessageToTelegram(body.content || 'Alert!!!');
   }
 
   if (body.type === 'email') {

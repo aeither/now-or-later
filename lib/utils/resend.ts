@@ -2,6 +2,7 @@ import { ActionBody } from '@/app/api/qstash/route';
 import { env } from '@/env';
 import { Resend } from 'resend';
 import { getCurrentDateTime } from './helpers';
+import { sendMessageToTelegram } from './telegram';
 
 const fetchBTCPrice = async () => {
   const response = await fetch(
@@ -31,6 +32,7 @@ export const sendEmail = async (actionBody: ActionBody) => {
     });
 
     if (response.data) {
+      sendMessageToTelegram(`email sent ${response.data.id}`);
       console.log('Message sent successfully');
     } else {
       console.error('Error sending message:', response.error);

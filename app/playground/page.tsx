@@ -53,6 +53,7 @@ import { DelayMintComponent } from '@/components/web3/DelayMintComponent';
 import { DeployComponent } from '@/components/web3/DeployComponent';
 import { ScheduleNewsletterComponent } from '@/components/web3/ScheduleNewsletterComponent';
 import { TelegramNotifyComponent } from '@/components/web3/TelegramNotifyComponent';
+import QueuedComponent from '@/components/upstash/QueuedComponent';
 
 // const userMessage = (
 //   <UserMessage>
@@ -103,6 +104,12 @@ const scheduleNewsletterComponent = (
 const telegramNotifyComponent = (
   <BotCard>
     <TelegramNotifyComponent />
+  </BotCard>
+);
+
+const queuedComponent = (
+  <BotCard>
+    <QueuedComponent />
   </BotCard>
 );
 
@@ -233,6 +240,10 @@ export default function Page() {
       {
         id: Date.now(),
         display: telegramNotifyComponent,
+      },
+      {
+        id: Date.now(),
+        display: queuedComponent,
       },
       // {
       //   id: Date.now(),
