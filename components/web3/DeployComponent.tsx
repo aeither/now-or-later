@@ -18,6 +18,15 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { useActiveAccount } from 'thirdweb/react';
 import * as z from 'zod';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const formSchema = z.object({
   // prompt: z.string().nonempty({ message: "Required" }),
@@ -26,6 +35,7 @@ const formSchema = z.object({
   amount: z.number().min(1, { message: 'Required' }),
   delay: z.string().min(1, { message: 'Required' }),
   times: z.string().min(1, { message: 'Required' }),
+  chain: z.enum(['neon', 'astar']),
 });
 
 export function DeployComponent() {
@@ -40,7 +50,8 @@ export function DeployComponent() {
       address: '',
       amount: 100,
       delay: 'now',
-      times: '3',
+      times: '1',
+      chain: 'neon',
     },
   });
 
@@ -71,7 +82,7 @@ export function DeployComponent() {
     if (response.status === 200) {
       toast({
         title: 'Success',
-        description: 'Postcard succesfully scheduled.',
+        description: 'Action succesfully scheduled.',
       });
     } else {
       toast({
@@ -103,7 +114,7 @@ export function DeployComponent() {
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name='amount'
               render={({ field }) => (
@@ -115,7 +126,7 @@ export function DeployComponent() {
                   <FormMessage />
                 </FormItem>
               )}
-            />
+            /> */}
             <FormField
               control={form.control}
               name='delay'
@@ -132,13 +143,24 @@ export function DeployComponent() {
             />
             <FormField
               control={form.control}
-              name='times'
+              name='chain'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Times</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
+                  <FormLabel>Chain</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder='Select chain' />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value='neon'>Neon</SelectItem>
+                      <SelectItem value='astar'>Astar</SelectItem>
+                    </SelectContent>
+                  </Select>
 
                   <FormMessage />
                 </FormItem>

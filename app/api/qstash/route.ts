@@ -9,6 +9,7 @@ export interface ActionBody {
   delay: number;
   times: number;
   chain?: string;
+  title?: string;
 }
 
 import { redis } from '@/lib/redis';

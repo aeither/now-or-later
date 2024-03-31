@@ -69,7 +69,7 @@ export default function MainForm() {
     if (response.status === 200) {
       toast({
         title: 'Success',
-        description: 'Postcard succesfully scheduled.',
+        description: 'Action succesfully scheduled.',
       });
     } else {
       toast({

@@ -45,9 +45,9 @@ export const deployToken = async (actionBody: ActionBody) => {
       account,
       type: 'TokenERC20',
       params: {
-        name: 'Nola2',
-        description: 'Nola Token2',
-        symbol: 'NOL2',
+        name: actionBody.title || 'NoLa Coin',
+        description: 'NoLA Token2',
+        symbol: 'NOLA',
       },
     });
     console.log('🚀 ~ main ~ contractAddress:', contractAddress);
