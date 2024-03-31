@@ -8,6 +8,7 @@ import {
 import { defineChain } from 'thirdweb/chains';
 import { privateKeyAccount } from 'thirdweb/wallets';
 import { thirdwebClient } from '../utils/config';
+import { sendMessageToTelegram } from '../utils/telegram';
 
 export const mintToken = async (actionBody: ActionBody) => {
   const account = privateKeyAccount({
@@ -33,11 +34,18 @@ export const mintToken = async (actionBody: ActionBody) => {
     },
   });
 
-  // const chain =
+  let chain;
+  if (actionBody.chain === 'neon') {
+    chain = neonChain;
+  } else if (actionBody.chain === 'astar') {
+    chain = chainAstarZKyoto;
+  } else {
+    chain = neonChain;
+  }
 
   const contract = getContract({
     client: thirdwebClient,
-    chain: chainAstarZKyoto,
+    chain: chain,
     address: actionBody.address,
     // OPTIONAL: the contract's abi
   });
@@ -56,8 +64,21 @@ export const mintToken = async (actionBody: ActionBody) => {
     account: account,
   });
 
-  console.log(
-    '🚀 ~ main ~ contractAddress:',
-    `https://astar-zkyoto.blockscout.com/tx/${receipt.transactionHash}`
-  );
+  if (actionBody.chain === 'neon') {
+    sendMessageToTelegram(
+      `https://devnet.neonscan.org/tx/${receipt.transactionHash}`
+    );
+    console.log(
+      '🚀 ~ main ~ contractAddress:',
+      `https://devnet.neonscan.org/tx/${receipt.transactionHash}`
+    );
+  } else {
+    sendMessageToTelegram(
+      `https://astar-zkyoto.blockscout.com/tx/${receipt.transactionHash}`
+    );
+    console.log(
+      '🚀 ~ main ~ contractAddress:',
+      `https://astar-zkyoto.blockscout.com/tx/${receipt.transactionHash}`
+    );
+  }
 };

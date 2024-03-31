@@ -5,11 +5,13 @@ export interface ActionBody {
   userAddress: string;
   privateKey: string;
   address: string;
-  amount: number;
+  amount: string;
   delay: number;
   times: number;
   chain?: string;
   title?: string;
+  email?: string;
+  content?: string;
 }
 
 import { redis } from '@/lib/redis';
@@ -37,7 +39,7 @@ export async function POST(request: Request) {
 
   if (body.type === 'telegram') {
     console.log('sending message to Telegram... ');
-    sendMessageToTelegram(body);
+    sendMessageToTelegram('message here');
   }
 
   if (body.type === 'email') {

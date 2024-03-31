@@ -22,7 +22,7 @@ import { ActionBody } from '../api/qstash/route';
 const formSchema = z.object({
   // prompt: z.string().nonempty({ message: "Required" }),
   address: z.string().min(1, { message: 'Required' }),
-  amount: z.number().min(1, { message: 'Required' }),
+  amount: z.string().min(1, { message: 'Required' }),
   delay: z.string().min(1, { message: 'Required' }),
   times: z.string().min(1, { message: 'Required' }),
 });
@@ -36,7 +36,7 @@ export default function MainForm() {
     defaultValues: {
       // prompt: "",
       address: '',
-      amount: 100,
+      amount: '100',
       delay: 'now',
       times: '3',
     },
@@ -53,6 +53,7 @@ export default function MainForm() {
 
     const combinedValues: ActionBody = {
       ...values,
+      amount: values.amount.toString(),
       delay: +delayInSeconds,
       times: +values.times,
       type: 'email',

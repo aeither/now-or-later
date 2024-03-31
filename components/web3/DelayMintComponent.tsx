@@ -18,13 +18,23 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { useActiveAccount } from 'thirdweb/react';
 import * as z from 'zod';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const formSchema = z.object({
   // prompt: z.string().nonempty({ message: "Required" }),
   address: z.string().min(1, { message: 'Required' }),
-  amount: z.number().min(1, { message: 'Required' }),
+  amount: z.string().min(1, { message: 'Required' }),
   delay: z.string().min(1, { message: 'Required' }),
   times: z.string().min(1, { message: 'Required' }),
+  chain: z.string().min(1, { message: 'Required' }),
 });
 
 export function DelayMintComponent() {
@@ -34,11 +44,11 @@ export function DelayMintComponent() {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      // prompt: "",
-      address: '0x99160B322E92739f03050cA8BAa32Df658C9e423',
-      amount: 100,
+      address: '0x09Ae5D3d2F2630AB5bb04E097eb66C50AF367f85',
+      amount: '100',
       delay: 'now',
       times: '3',
+      chain: 'neon',
     },
   });
 
@@ -109,7 +119,7 @@ export function DelayMintComponent() {
                 <FormItem>
                   <FormLabel>Amount</FormLabel>
                   <FormControl>
-                    <Input placeholder='100' type='number' {...field} />
+                    <Input placeholder='100' {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -138,6 +148,31 @@ export function DelayMintComponent() {
                   <FormControl>
                     <Input {...field} />
                   </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name='chain'
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Chain</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder='Select chain' />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value='neon'>Neon</SelectItem>
+                      <SelectItem value='astar'>Astar</SelectItem>
+                    </SelectContent>
+                  </Select>
 
                   <FormMessage />
                 </FormItem>

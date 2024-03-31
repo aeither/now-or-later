@@ -18,6 +18,17 @@ video link
 
 ## Challenges I ran into
 
+On Neon Devnet Smart contract Deployment slow, server run out time. Sometimes it doesn't get deployed but the next day it got deployed.
+"Transaction not found after 30 blocks"
+
+By mistakeling try to call a non existent contract on astar and it still return success call.
+https://astar-zkyoto.blockscout.com/address/0x09Ae5D3d2F2630AB5bb04E097eb66C50AF367f85
+
+## Info
+
+Neon Contract deployed
+https://devnet.neonscan.org/tx/0x745bce73f871221f8d3d35217eb1e2b2a74fb4bb5c463667694c549f1709384a
+
 ## Description
 
 Now or Later

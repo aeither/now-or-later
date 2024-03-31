@@ -24,7 +24,7 @@ const formSchema = z.object({
   // prompt: z.string().nonempty({ message: "Required" }),
   content: z.string().min(1, { message: 'Required' }),
   address: z.string().min(1, { message: 'Required' }),
-  amount: z.number().min(1, { message: 'Required' }),
+  amount: z.string().min(1, { message: 'Required' }),
   delay: z.string().min(1, { message: 'Required' }),
   times: z.string().min(1, { message: 'Required' }),
 });
@@ -39,7 +39,7 @@ export function TelegramNotifyComponent() {
       // prompt: "",
       content: 'native coin price',
       address: '0x99160B322E92739f03050cA8BAa32Df658C9e423',
-      amount: 100,
+      amount: '100',
       delay: 'now',
       times: '3',
     },

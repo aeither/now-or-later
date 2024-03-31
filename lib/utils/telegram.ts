@@ -1,9 +1,7 @@
 import { ActionBody } from '@/app/api/qstash/route';
 import { env } from '@/env';
 
-export const sendMessageToTelegram = async (actionBody: ActionBody) => {
-  const messageText = 'hello world';
-
+export const sendMessageToTelegram = async (messageText: string) => {
   try {
     const response = await fetch(
       `https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`,
