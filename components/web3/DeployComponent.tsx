@@ -35,7 +35,7 @@ const formSchema = z.object({
   amount: z.number().min(1, { message: 'Required' }),
   delay: z.string().min(1, { message: 'Required' }),
   times: z.string().min(1, { message: 'Required' }),
-  chain: z.enum(['neon', 'astar']),
+  chain: z.string().min(1, { message: 'Required' }),
 });
 
 export function DeployComponent() {
@@ -46,7 +46,6 @@ export function DeployComponent() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       title: '',
-      // prompt: "",
       address: '',
       amount: 100,
       delay: 'now',
@@ -56,11 +55,13 @@ export function DeployComponent() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    console.log('submitting...');
+
     const delayInSeconds = convertToSeconds(values.delay);
     const storedPrivateKey = localStorage.getItem('ai-home-wallet-key');
 
-    if (!activeAccount?.address || !storedPrivateKey) {
-      alert('missing values !activeAccount?.address || storedPrivateKey');
+    if (!activeAccount || !activeAccount.address || !storedPrivateKey) {
+      alert('wallet not connected or profile not set');
       return 'missing values !activeAccount?.address || storedPrivateKey';
     }
 

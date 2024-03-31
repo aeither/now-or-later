@@ -46,8 +46,8 @@ export function DelayMintComponent() {
     const delayInSeconds = convertToSeconds(values.delay);
     const storedPrivateKey = localStorage.getItem('ai-home-wallet-key');
 
-    if (!activeAccount?.address || !storedPrivateKey) {
-      alert('missing values !activeAccount?.address || storedPrivateKey');
+    if (!activeAccount || !activeAccount.address || !storedPrivateKey) {
+      alert('wallet not connected or profile not set');
       return 'missing values !activeAccount?.address || storedPrivateKey';
     }
 
