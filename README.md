@@ -29,6 +29,9 @@ https://astar-zkyoto.blockscout.com/address/0x09Ae5D3d2F2630AB5bb04E097eb66C50AF
 Neon Contract deployed
 https://devnet.neonscan.org/tx/0x745bce73f871221f8d3d35217eb1e2b2a74fb4bb5c463667694c549f1709384a
 
+Minting Tokens
+https://astar-zkyoto.blockscout.com/tx/0x7d73e4f6b5a4d87f23a98ac2778ae390dc709bc080cbadc211c9e28d4eb7812f
+
 ## Description
 
 Now or Later
