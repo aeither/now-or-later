@@ -51,6 +51,7 @@ import {
 import { TokenListComponent } from '@/components/tokens';
 import { DelayMintComponent } from '@/components/web3/DelayMintComponent';
 import { DeployComponent } from '@/components/web3/DeployComponent';
+import { ScheduleNewsletterComponent } from '@/components/web3/ScheduleNewsletterComponent';
 
 // const userMessage = (
 //   <UserMessage>
@@ -89,6 +90,12 @@ const delayMintComponent = (
 const deployComponent = (
   <BotCard>
     <DeployComponent />
+  </BotCard>
+);
+
+const scheduleNewsletterComponent = (
+  <BotCard>
+    <ScheduleNewsletterComponent />
   </BotCard>
 );
 
@@ -211,6 +218,10 @@ export default function Page() {
       {
         id: Date.now(),
         display: deployComponent,
+      },
+      {
+        id: Date.now(),
+        display: scheduleNewsletterComponent,
       },
       // {
       //   id: Date.now(),

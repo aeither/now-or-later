@@ -18,26 +18,25 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { useActiveAccount } from 'thirdweb/react';
 import * as z from 'zod';
+import { Textarea } from '../ui/textarea';
 
 const formSchema = z.object({
   // prompt: z.string().nonempty({ message: "Required" }),
-  title: z.string().min(1, { message: 'Required' }),
   address: z.string().min(1, { message: 'Required' }),
   amount: z.number().min(1, { message: 'Required' }),
   delay: z.string().min(1, { message: 'Required' }),
   times: z.string().min(1, { message: 'Required' }),
 });
 
-export function DeployComponent() {
+export function ScheduleNewsletterComponent() {
   const activeAccount = useActiveAccount();
   const router = useRouter();
   const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      title: '',
       // prompt: "",
-      address: '',
+      address: '0x99160B322E92739f03050cA8BAa32Df658C9e423',
       amount: 100,
       delay: 'now',
       times: '3',
@@ -57,7 +56,7 @@ export function DeployComponent() {
       ...values,
       delay: +delayInSeconds,
       times: 1,
-      type: 'deploy',
+      type: 'email',
       userAddress: activeAccount?.address,
       privateKey: storedPrivateKey,
     };
@@ -84,7 +83,7 @@ export function DeployComponent() {
   return (
     <>
       <div className='flex flex-col w-full items-center justify-between'>
-        <h1 className='text-4xl font-bold'>Deploy Token</h1>
+        <h1 className='text-4xl font-bold'>Send Newsletter</h1>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
@@ -92,30 +91,19 @@ export function DeployComponent() {
           >
             <FormField
               control={form.control}
-              name='title'
+              name='address'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Name</FormLabel>
+                  <FormLabel>Token Address</FormLabel>
                   <FormControl>
-                    <Input placeholder='Doggocoin' {...field} />
+                    <Textarea placeholder='Describe the content' {...field} />
                   </FormControl>
+
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name='amount'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Amount</FormLabel>
-                  <FormControl>
-                    <Input placeholder='100' type='number' {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+
             <FormField
               control={form.control}
               name='delay'
@@ -130,22 +118,8 @@ export function DeployComponent() {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name='times'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Times</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <Button variant='outline' type='submit'>
-              Deploy
+              Schedule
             </Button>
           </form>
         </Form>
